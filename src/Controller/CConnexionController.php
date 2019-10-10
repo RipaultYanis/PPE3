@@ -51,15 +51,18 @@ class CConnexionController extends AbstractController
                 $session->set('prenom',$comp->getPrenom());
                 $session->get('prenom');
                 
+                
                  return $this->render('c_accueil/index.html.twig',array('form'=>$form->createView())); 
             
         }
         }
         foreach ($visiteurs as $visit) {
              if ($visit->getLogin()==$login && $visit->getMdp()==$password){
-                 $nom=$visit->getNom();
-                 $prenom=$visit->getPrenom();
-                 return $this->render('v_accueil/index.html.twig',array('form'=>$form->createView(),'nom'=>$nom,'prenom'=>$prenom)); 
+                $session->set('nom',$visit->getNom());
+                $session->get('nom');
+                $session->set('prenom',$visit->getPrenom());
+                $session->get('prenom');
+                 return $this->render('v_accueil/index.html.twig',array('form'=>$form->createView())); 
             
         }
             

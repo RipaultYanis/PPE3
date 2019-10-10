@@ -3,7 +3,7 @@
 {% block title %}Hello VAccueilController!{% endblock %}
 
 {% block body %}
-    <center><h1>{{ nom }} {{prenom}}</h1>
+    <center><h1>{{ app.session.get("nom") }} {{app.session.get("prenom")}}</h1>
     </center> 
     <style>
 ul {

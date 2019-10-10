@@ -9,6 +9,7 @@ use App\Entity\FraisForfait;
 use App\Form\FicheFraisType;
 use App\Form\FraisForfaitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class VSaisirFicheFraisController extends AbstractController
 {
@@ -18,7 +19,9 @@ class VSaisirFicheFraisController extends AbstractController
    
 public function creerFicheFrais(Request $query)
 {
-    $id=1;
+    $session=new Session();
+      
+ $id=1;
 // On crée un objet Candidat
 $fiche = new FicheFrais();
 $fiche = $this->getDoctrine()->getManager()->getRepository(FicheFrais::class)->getUneFicheFrais($id);

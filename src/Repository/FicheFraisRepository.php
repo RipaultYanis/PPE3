@@ -59,4 +59,15 @@ $query = $qb->getQuery();
 $result = $query->getOneOrNullResult();
 return $result;
 }
+public function findAllFrais()
+{
+
+    $qb = $this->_em->createQueryBuilder();
+    $qb->select('a')
+    ->from(FicheFrais::class,'a')
+            ;
+    $query = $qb->getQuery();
+    $result = $query->getResult();
+return $result;
+}
 }
