@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class VmesFichesFraisController extends AbstractController
 {
     /**
-     * @Route("/vmes/fiches/frais", name="vmes_fiches_frais")
+     * @Route("/v/mes/fiches/frais", name="vmes_fiches_frais")
      */
     public function index()
     {

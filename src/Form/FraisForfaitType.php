@@ -24,7 +24,10 @@ class FraisForfaitType extends AbstractType
         $builder
             ->add('libelle',TextType::class,array('label'=>'libelle','attr'=>array('class'=>'form-control','placeholder'=>'libelle')))
             ->add('montant',NumberType::class,array('label'=>'montant','attr'=>array('class'=>'form-control','placeholder'=>'montant')))
-        ;
+            ->add('valider',SubmitType::class,array('label'=>'Valider','attr'=>array('class'=>'btn btn-primary btn block')))
+            ->add('annuler',ResetType::class,array('label'=>'Effacer','attr'=>array('class'=>'btn btn-primary btn block')))
+           
+                ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
