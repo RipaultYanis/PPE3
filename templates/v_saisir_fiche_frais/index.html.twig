@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VSaisirFicheFraisController!{% endblock %}
+
+{% block body %}
+    <div class ="container">
+     <h3>Ajouter un nouveau frais </h3>
+    <div class="form-group">
+    {{ form(form1) }}
+    </div>
+        
+
+<h3>Ajouter un nouveau frais hors forfait </h3>
+<div class="form-group">
+{{ form(form2) }}
+</div>
+    </div>
+{% endblock %}
