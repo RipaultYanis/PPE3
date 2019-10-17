@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\FicheFrais;
+use App\Repository\FicheFraisRepository;
 
 class CAccueilController extends AbstractController
 {
@@ -12,8 +14,7 @@ class CAccueilController extends AbstractController
      */
     public function index()
     {
-        return $this->render('c_accueil/index.html.twig', [
-            'controller_name' => 'CAccueilController',
-        ]);
-    }
+        $mesFiches=$this->getDoctrine()->getManager()->getRepository(FicheFrais::class)->findAllFrais();
+        return $this->render('c_accueil/index.html.twig',array('mesFiches'=>$mesFiches));
+        }
 }
