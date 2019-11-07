@@ -20,12 +20,16 @@ class VSaisirFicheFraisController extends AbstractController
 public function creerFicheFrais(Request $query)
 {
     $session=new Session();
-      
- $id=1;
-// On crée un objet Candidat
-$fiche = new FicheFrais();
-$fiche = $this->getDoctrine()->getManager()->getRepository(FicheFrais::class)->getUneFicheFrais($id);
-$frais = new FraisForfait();
+    $login=$session->get('login');;
+    $password=$session->get('password');
+    $id=$session->get('id');
+    echo $login.' '.$password;
+    //$id=$this->getDoctrine()->getManager()->getRepository(FicheFrais::class)->getIdVisiteur($login,$password);
+    echo $id;
+// On crée un objet
+        $fiche = new FicheFrais();
+        $fiche = $this->getDoctrine()->getManager()->getRepository(FicheFrais::class)->getUneFicheFrais($id);
+        $frais = new FraisForfait();
 
 
         $form2 = $this->createForm(FraisForfaitType::class, $frais);

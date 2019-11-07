@@ -24,7 +24,7 @@ class CConnexionController extends AbstractController
      * @Route("/connexion", name="c_connexion")
      */
    public function authentifAction(Request $query) {
-       $session=new session();
+       
         $login = $password = null;
         $form = $this->get('form.factory')->createBuilder(FormType::class)
                 ->add('login',TextType::class,array('label'=>'Login :','attr'=>array('class'=>'form-control','placeholder'=>'login...')))
@@ -40,31 +40,48 @@ class CConnexionController extends AbstractController
         $data = $form->getData();
 
         $login = $data["login"];
+        echo $login;
         $password = $data["mdp"]; 
         $erreur="Login ou Mot de passe incorect";
         $comptables=$this->getComptable();
         $visiteurs=$this->getVisiteur();
-        foreach ($comptables as $comp) {
-             if ($comp->getLogin()==$login && $comp->getMdp()==$password){
-                $session->set('nom',$comp->getNom());
-                $session->get('nom');
-                $session->set('prenom',$comp->getPrenom());
-                $session->get('prenom');
-                
-                
-                 return $this->render('c_accueil/index.html.twig',array('form'=>$form->createView())); 
-            
-        }
-        }
         foreach ($visiteurs as $visit) {
              if ($visit->getLogin()==$login && $visit->getMdp()==$password){
+                $session=new session();
                 $session->set('nom',$visit->getNom());
                 $session->get('nom');
                 $session->set('prenom',$visit->getPrenom());
                 $session->get('prenom');
+                $session->set('login',$visit->getLogin());
+                $session->get('login');
+                $session->set('password',$visit->getMdp());
+                $session->get('password');
+                $session->set('id',$visit->getId());
+                $session->get('id');
+                
+                
                  return $this->render('v_accueil/index.html.twig',array('form'=>$form->createView())); 
             
         }
+        foreach ($comptables as $comp) {
+             if ($comp->getLogin()==$login && $comp->getMdp()==$password){
+                $session=new session();
+                $session->set('nom',$comp->getNom());
+                $session->get('nom');
+                $session->set('prenom',$comp->getPrenom());
+                $session->get('prenom');
+                $session->set('login',$comp->getLogin());
+                $session->get('login');
+                $session->set('password',$comp->getMdp());
+                $session->get('password');
+                           
+                
+                
+                 return $this->redirectToRoute("accueil"); 
+            
+        }
+        }
+        
             
         }$session->getFlashBag()->add('notice','Login ou Mot de passe incorrect');
         foreach ($session->getFlashBag()->get('notice',[])as $message){

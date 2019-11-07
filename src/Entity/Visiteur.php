@@ -180,7 +180,7 @@ class Visiteur
         return $this;
     }
 
-    public function removeFicheFrai(FicheFrais $ficheFrai): self
+    public function removeFicheFrais(FicheFrais $ficheFrai): self
     {
         if ($this->ficheFrais->contains($ficheFrai)) {
             $this->ficheFrais->removeElement($ficheFrai);

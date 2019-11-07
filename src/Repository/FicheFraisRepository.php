@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\FicheFrais;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use App\Entity\Visiteur;
 
 /**
  * @method FicheFrais|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,13 +48,24 @@ class FicheFraisRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function getIdVisiteur($login,$password){
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('a.id')
+        ->from(Visiteur::class,'a')
+        ->where('a.login = :login and a.mdp= :mdp')
+        ->setParameter('login', $login)
+        ->setParameter('mdp', $password);
+        $query = $qb->getQuery();
+        $result = $query->getOneOrNullResult();
+        return $result;
+    }
     public function getUneFicheFrais($id)
 {
 
 $qb = $this->_em->createQueryBuilder();
 $qb->select('a')
 ->from(FicheFrais::class,'a')
-->where('a.id = :id')
+->where('a.idVisiteur = :id')
 ->setParameter('id', $id);
 $query = $qb->getQuery();
 $result = $query->getOneOrNullResult();
