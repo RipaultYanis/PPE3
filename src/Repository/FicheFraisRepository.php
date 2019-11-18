@@ -48,25 +48,17 @@ class FicheFraisRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function getIdVisiteur($login,$password){
-        $qb = $this->_em->createQueryBuilder();
-        $qb->select('a.id')
-        ->from(Visiteur::class,'a')
-        ->where('a.login = :login and a.mdp= :mdp')
-        ->setParameter('login', $login)
-        ->setParameter('mdp', $password);
-        $query = $qb->getQuery();
-        $result = $query->getOneOrNullResult();
-        return $result;
-    }
-    public function getUneFicheFrais($id)
+    
+    public function getUneFicheFrais($id,$mois)
 {
 
 $qb = $this->_em->createQueryBuilder();
 $qb->select('a')
 ->from(FicheFrais::class,'a')
-->where('a.idVisiteur = :id')
-->setParameter('id', $id);
+->where('a.idVisiteur = :id' )
+->setParameter('id', $id)
+->andWhere('a.mois =:mois')
+->setParameter('mois', $mois);
 $query = $qb->getQuery();
 $result = $query->getOneOrNullResult();
 return $result;
